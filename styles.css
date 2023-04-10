@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #1c1c1e;
+  background-color: #100e17;
   color: #ffffff;
   margin: 0;
   padding: 0;
@@ -13,10 +13,6 @@ body {
   padding: 1rem;
 }
 
-.info-container {
-  margin-bottom: 2rem;
-}
-
 h1 {
   text-align: center;
   font-size: 2rem;
@@ -25,16 +21,33 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
+.info-section {
+  background-color: #303030;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
 .info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
 .column {
-  display: inline-block;
-  width: calc(100% / 3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% / 2);
   padding: 0.5rem;
   box-sizing: border-box;
   text-align: center;
@@ -49,7 +62,7 @@ h2 {
   width: 100%;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: #4caf50;
+  background-color: #2172e5;
   color: #ffffff;
   text-align: center;
   border: none;
@@ -60,7 +73,7 @@ h2 {
 
 .btn:hover,
 .btn:focus {
-  background-color: #3e8e41;
+  background-color: #1858bb;
 }
 
 .btn:disabled {
@@ -83,7 +96,7 @@ h2 {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
-  background-color: #303030;
+  background-color: #1c1c1e;
   color: #ffffff;
   border: 1px solid #606060;
   border-radius: 0.25rem;
@@ -92,5 +105,5 @@ h2 {
 
 .input-field:focus {
   outline: none;
-  border-color: #4caf50;
+  border-color: #2172e5;
 }
