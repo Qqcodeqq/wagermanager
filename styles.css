@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #100e17;
-  color: #ffffff;
+  background-color: #f4f4f4;
+  color: #333333;
   margin: 0;
   padding: 0;
 }
@@ -27,34 +27,6 @@ h2 {
 h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-}
-
-.info-section {
-  background-color: #303030;
-  padding: 2rem 0;
-  margin-bottom: 2rem;
-}
-
-.info {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: calc(100% / 2);
-  padding: 0.5rem;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.no-participant {
-  color: #4caf50;
 }
 
 .btn {
@@ -96,9 +68,9 @@ h3 {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
-  background-color: #1c1c1e;
-  color: #ffffff;
-  border: 1px solid #606060;
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #cccccc;
   border-radius: 0.25rem;
   box-sizing: border-box;
 }
