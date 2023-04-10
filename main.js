@@ -1,72 +1,77 @@
+// main.js
 const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"approveEmergencyWithdrawal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claimJudgeFee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_judge","type":"address"},{"internalType":"uint256","name":"_wagerAmount","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"emergencyWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"emergencyWithdrawalApproved","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"finalOutcome","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"participant","type":"address"}],"name":"isDeposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"judge","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"outcome","type":"uint256"}],"name":"judgeDecision","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"judgeFeeClaimed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"outcomes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant1","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant1Deposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant2","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant2Deposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"resetContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"outcome","type":"uint256"}],"name":"submitOutcome","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"wagerAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]; // Replace <ABI_JSON> with the ABI you provided
 const contractAddress = '0x3e06f9518A446a127A5bB72011C4EDFF268F13b4'; // Replace with your contract address
 const providerUrl = 'https://nova.arbitrum.io/rpc';
 
-let web3 = new Web3(providerUrl);
-let contractInstance = new web3.eth.Contract(contractABI, contractAddress);
+let web3;
+let contract;
+let userAddress;
 
-document.getElementById('connectBtn').addEventListener('click', connectWallet);
-
-async function connectWallet() {
-  if (typeof window.ethereum !== 'undefined') {
+window.addEventListener("load", async () => {
+  if (window.ethereum) {
+    web3 = new Web3(window.ethereum);
     try {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const userAddress = accounts[0];
-      document.getElementById('userAddress').innerText = `Connected: ${userAddress}`;
-      document.getElementById('userAddress').style.display = 'block';
-
-      web3 = new Web3(window.ethereum);
-      contractInstance = new web3.eth.Contract(contractABI, contractAddress);
-
-      document.getElementById('depositBtn').addEventListener('click', deposit);
-      document.getElementById('depositBtn').disabled = false;
-
-      updateInfo();
+      await window.ethereum.enable();
+      contract = new web3.eth.Contract(contractABI, contractAddress);
+      initializeUI();
     } catch (error) {
-      console.error('User rejected connection:', error);
+      console.error("User denied account access");
     }
   } else {
-    alert('Metamask not found. Please install Metamask extension.');
+    console.error("No web3 provider detected");
   }
-}
+});
 
-async function deposit() {
-  const judgeAddress = document.getElementById('judgeAddress').value;
-  const wagerAmount = document.getElementById('wagerAmount').value;
-  const userAddress = document.getElementById('userAddress').innerText.replace('Connected: ', '');
+async function initializeUI() {
+  const accounts = await web3.eth.getAccounts();
+  userAddress = accounts[0];
 
-  if (web3.utils.isAddress(judgeAddress)) {
+  document.getElementById("connectBtn").addEventListener("click", async () => {
     try {
-      await contractInstance.methods.deposit(judgeAddress, web3.utils.toWei(wagerAmount, 'ether')).send({ from: userAddress, value: web3.utils.toWei(wagerAmount, 'ether') });
-      updateInfo();
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      document.getElementById("connectBtn").style.display = "none";
+      document.getElementById("userAddress").innerText = `Connected: ${userAddress}`;
+      document.getElementById("userAddress").style.display = "block";
+      document.getElementById("depositBtn").disabled = false;
     } catch (error) {
-      console.error('Transaction error:', error);
+      console.error("User denied account access");
     }
-  } else {
-    alert('Please enter a valid judge address.');
-  }
+  });
+
+  document.getElementById("depositBtn").addEventListener("click", async () => {
+    const judgeAddress = document.getElementById("judgeAddress").value;
+    const wagerAmount = document.getElementById("wagerAmount").value;
+
+    if (!web3.utils.isAddress(judgeAddress)) {
+      alert("Please enter a valid judge address");
+      return;
+    }
+
+    try {
+      const value = web3.utils.toWei(wagerAmount, "ether");
+      await contract.methods.deposit(judgeAddress, value).send({ from: userAddress, value });
+      alert("Deposit successful");
+    } catch (error) {
+      console.error("Error while depositing:", error);
+    }
+  });
+
+  // Fetch contract information
+  const owner = await contract.methods.owner().call();
+  const judge = await contract.methods.judge().call();
+  const participant1 = await contract.methods.participant1().call();
+  const participant2 = await contract.methods.participant2().call();
+  const wagerAmount = await contract.methods.wagerAmount().call();
+  const wagerAmountInEther = web3.utils.fromWei(wagerAmount, "ether");
+
+  const participant1Text = participant1 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant1;
+  const participant2Text = participant2 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant2;
+
+  document.getElementById("contract-info").innerHTML = `
+    <p>Owner: ${owner}</p>
+    <p>Judge: ${judge}</p>
+    <p>Participant 1: ${participant1Text}</p>
+    <p>Participant 2: ${participant2Text}</p>
+    <p>Wager Amount: ${wagerAmountInEther} ETH</p>
+  `;
 }
-
-async function updateInfo() {
-  const participant1Address = await contractInstance.methods.participant1().call();
-  const participant2Address = await contractInstance.methods.participant2().call();
-  const judgeAddress = await contractInstance.methods.judge().call();
-  const wagerAmountInWei = await contractInstance.methods.wagerAmount().call();
-  
-  const participant1Elem = document.getElementById('participant1');
-  const participant2Elem = document.getElementById('participant2');
-  const judgeElem = document.getElementById('judge');
-  const wagerAmountDisplay = document.getElementById('wagerAmountDisplay');
-
-  const emptyAddress = '0x0000000000000000000000000000000000000000';
-
-  participant1Elem.innerText = participant1Address === emptyAddress ? 'No participant yet, you can deposit!' : participant1Address;
-  participant2Elem.innerText = participant2Address === emptyAddress ? 'No participant yet, you can deposit!' : participant2Address;
-  judgeElem.innerText = judgeAddress;
-
-  const wagerAmountInEther = web3.utils.fromWei(wagerAmountInWei, 'ether');
-  wagerAmountDisplay.innerText = wagerAmountInEther;
-}
-
-
-
