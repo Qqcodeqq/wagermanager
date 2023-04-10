@@ -45,6 +45,10 @@ body {
   margin-right: 1rem;
 }
 
+.actions-container {
+  margin-right: 0;
+}
+
 h1,
 h2 {
   font-size: 1.5rem;
