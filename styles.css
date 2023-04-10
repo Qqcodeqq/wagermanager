@@ -32,7 +32,7 @@ body {
 .interaction-container {
   display: flex;
   flex-direction: row;
-  width: 50%;
+  width: 100%;
 }
 
 .container,
@@ -43,10 +43,11 @@ body {
   background-color: #1e1c2c;
   border-radius: 1rem;
   width: 50%;
+  margin-right: 3px;
 }
 
-.container {
-  margin-right: 1rem;
+.container:last-child {
+  margin-right: 0;
 }
 
 h1,
