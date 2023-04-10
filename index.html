@@ -12,27 +12,35 @@
     <h1>Smart Contract Interaction</h1>
     <button id="connectBtn" class="btn">Connect Wallet</button>
     <div id="userAddress" class="connected-address"></div>
-    <h2>Contract Information</h2>
-    <div id="info">
-      <h3>Wager Amount (in Ether):</h3>
-      <p id="wagerAmountDisplay"></p>
-      <h3>Participant 1:</h3>
-      <p id="participant1"></p>
-      <h3>Participant 2:</h3>
-      <p id="participant2"></p>
-      <h3>Judge Address:</h3>
-      <p id="judge"></p>
+    <div id="participantSection">
+      <h2>Contract Information</h2>
+      <div id="info">
+        <h3>Wager Amount (in Ether):</h3>
+        <p id="wagerAmountDisplay"></p>
+        <h3>Participant 1:</h3>
+        <p id="participant1"></p>
+        <h3>Participant 2:</h3>
+        <p id="participant2"></p>
+        <h3>Judge Address:</h3>
+        <p id="judge"></p>
+      </div>
+      <h2>Deposit</h2>
+      <div class="form-group">
+        <label for="judgeAddress">Judge Address:</label>
+        <input type="text" id="judgeAddress" class="input-field">
+      </div>
+      <div class="form-group">
+        <label for="wagerAmount">Wager Amount (in Ether):</label>
+        <input type="number" id="wagerAmount" class="input-field" min="0" step="0.0001">
+      </div>
+      <button id="depositBtn" class="btn" disabled>Deposit</button>
     </div>
-    <h2>Deposit</h2>
-    <div class="form-group">
-      <label for="judgeAddress">Judge Address:</label>
-      <input type="text" id="judgeAddress" class="input-field">
+    <div id="judgeSection" style="display:none;">
+      <h2>Judge Actions</h2>
+      <button id="judgeDecisionBtn" class="btn">Judge Decision</button>
+      <button id="claimJudgeFeeBtn" class="btn">Claim Judge Fee</button>
+      <button id="approveEmergencyWithdrawalBtn" class="btn">Approve Emergency Withdrawal</button>
     </div>
-    <div class="form-group">
-      <label for="wagerAmount">Wager Amount (in Ether):</label>
-      <input type="number" id="wagerAmount" class="input-field" min="0" step="0.0001">
-    </div>
-    <button id="depositBtn" class="btn" disabled>Deposit</button>
   </div>
   <script src="main.js"></script>
 </body>
