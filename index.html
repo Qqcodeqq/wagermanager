@@ -17,26 +17,31 @@
         <p>Participant 2: <span id="participant2Info"></span></p>
         <p>Judge: <span id="judgeInfo"></span></p>
       </div>
-      <button id="connectBtn" class="btn">Connect Wallet</button>
-      <div id="userAddress" class="connected-address"></div>
-      <div class="form-group">
-        <label for="judgeAddress">Judge Address:</label>
-        <input type="text" id="judgeAddress" class="input-field">
-      </div>
-      <div class="form-group">
-        <label for="wagerAmount">Wager Amount (in Ether):</label>
-        <input type="number" id="wagerAmount" class="input-field" min="0" step="0.0001">
-      </div>
-      <button id="depositBtn" class="btn" disabled>Deposit</button>
     </div>
     <div class="interaction-container">
       <div class="container">
         <h1>Smart Contract Interaction</h1>
+        <button id="connectBtn" class="btn">Connect Wallet</button>
+        <div id="userAddress" class="connected-address"></div>
+        <div class="form-group">
+          <label for="judgeAddress">Judge Address:</label>
+          <input type="text" id="judgeAddress" class="input-field">
+        </div>
+        <div class="form-group">
+          <label for="wagerAmount">Wager Amount (in Ether):</label>
+          <input type="number" id="wagerAmount" class="input-field" min="0" step="0.0001">
+        </div>
+        <button id="depositBtn" class="btn" disabled>Deposit</button>
       </div>
       <div class="actions-container">
-        <button id="iLoseBtn" class="btn">I Lose</button>
-        <button id="iWinBtn" class="btn">I Win</button>
-        <button id="claimBtn" class="btn">Claim</button>
+        <div class="container">
+          <h1>Actions</h1>
+        </div>
+        <div class="container">
+          <button id="iLoseBtn" class="btn">I Lose</button>
+          <button id="iWinBtn" class="btn">I Win</button>
+          <button id="claimBtn" class="btn">Claim</button>
+        </div>
       </div>
     </div>
   </div>
