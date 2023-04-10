@@ -10,8 +10,30 @@
 <body>
   <div class="container">
     <h1>Smart Contract Interaction</h1>
+
+    <div class="info">
+      <div class="column">
+        <h2>Participant 1</h2>
+        <p id="participant1" class="no-participant">No participant yet, you can deposit!</p>
+      </div>
+      <div class="column">
+        <h2>Participant 2</h2>
+        <p id="participant2" class="no-participant">No participant yet, you can deposit!</p>
+      </div>
+      <div class="column">
+        <h2>Judge</h2>
+        <p id="judge"></p>
+      </div>
+    </div>
+
+    <div class="info">
+      <h2>Wager Amount (in Ether):</h2>
+      <p id="wagerAmountDisplay"></p>
+    </div>
+
     <button id="connectBtn" class="btn">Connect Wallet</button>
     <div id="userAddress" class="connected-address"></div>
+
     <div class="form-group">
       <label for="judgeAddress">Judge Address:</label>
       <input type="text" id="judgeAddress" class="input-field">
