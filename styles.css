@@ -42,11 +42,10 @@ body {
   box-sizing: border-box;
   background-color: #1e1c2c;
   border-radius: 1rem;
-  margin-right: 1rem;
 }
 
-.actions-container {
-  margin-right: 0;
+.container {
+  margin-right: 1rem;
 }
 
 h1,
