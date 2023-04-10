@@ -11,10 +11,29 @@ body {
 
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .info-container {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #1e1c2c;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contract-info p {
+  margin-bottom: 0.5rem;
+}
+
+.interaction-container {
+  display: flex;
+}
+
+.container {
   width: 100%;
   max-width: 400px;
   padding: 1rem;
@@ -24,11 +43,7 @@ body {
   margin-right: 1rem;
 }
 
-.contract-info p {
-  margin-bottom: 0.5rem;
-}
-
-.container {
+.actions-container {
   width: 100%;
   max-width: 400px;
   padding: 1rem;
@@ -91,10 +106,5 @@ h2 {
   color: #ffffff;
   font-size: 1rem;
   padding: 0.5rem;
-  outline: none;
-  margin-top: 0.25rem;
-}
-
-input[type="text"]:focus, input[type="number"]:focus {
-  border-color: #525252;
+  margin-bottom: 0.5rem;
 }
