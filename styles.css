@@ -13,7 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .info-container {
@@ -44,12 +44,11 @@ body {
 .container,
 .actions-container {
   flex: 1;
-  padding: 1rem;
+  padding: 3rem;
   box-sizing: border-box;
   background-color: #1e1c2c;
   border-radius: 1rem;
   width: 100%;
-  margin-left: 8px;
 }
 
 .container:last-child {
