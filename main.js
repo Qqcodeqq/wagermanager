@@ -154,8 +154,8 @@ async function updateOutcomes(participant1, participant2) {
   const participant1Outcome = document.getElementById("participant1-outcome");
   const participant2Outcome = document.getElementById("participant2-outcome");
 
-  participant1Outcome.innerText = `${outcome1 === "0" ? "Outcome not submitted" : outcome1 === "1" ? "Win" : "Loss"}`;
-  participant2Outcome.innerText = `${outcome2 === "0" ? "Outcome not submitted" : outcome2 === "1" ? "Win" : "Loss"}`;
+  participant1Outcome.innerText = outcome1 === "0" ? "Outcome not submitted" : outcome1;
+  participant2Outcome.innerText = outcome2 === "0" ? "Outcome not submitted" : outcome2;
 }
 
 async function submitJudgeDecision() {
