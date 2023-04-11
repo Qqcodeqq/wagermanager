@@ -61,6 +61,12 @@ async function connectWallet() {
     contract = new web3.eth.Contract(contractABI, contractAddress);
 
     try {
+      const chainId = await web3.eth.getChainId();
+      if (chainId !== 42161) {
+        alert("Please switch to the Arbitrum network and try again.");
+        return;
+      }
+
       await window.ethereum.request({ method: "eth_requestAccounts" });
       userAddress = (await web3.eth.getAccounts())[0];
 
