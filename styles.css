@@ -23,23 +23,6 @@ body {
   background-color: #1e1c2c;
   border-radius: 1rem;
   margin-bottom: 1rem;
-  position: relative;
-}
-
-.info-container .btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: auto;
-}
-
-.info-container .connected-address {
-  position: absolute;
-  top: 2.5rem;
-  right: 1rem;
-  font-size: 0.8rem;
-  color: #a3b1c6;
-  text-align: right;
 }
 
 .contract-info p {
