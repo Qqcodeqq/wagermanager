@@ -25,6 +25,14 @@ body {
   margin-bottom: 1rem;
 }
 
+.info-container .btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem; /* Same padding as the .btn selector */
+  width: 16.5%; /* Same width as the .btn selector */
+}
+
 .contract-info p {
   margin-bottom: 0.5rem;
 }
