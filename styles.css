@@ -36,8 +36,7 @@ body {
 }
 
 .interaction-container,
-.outcomes-container,
-.judge-panel-container {
+.outcome-judge-container {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -58,9 +57,6 @@ body {
   margin-right: 1rem;
 }
 
-.container:last-child {
-  margin-right: 0;
-}
 .container:last-child {
   margin-right: 0;
 }
@@ -114,4 +110,21 @@ h2 {
   font-size: 1rem;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.outcome-container,
+.judge-panel-container {
+  width: 50%;
+}
+
+.outcome-container {
+  margin-right: 1rem;
+}
+
+.outcome-container:last-child {
+  margin-right: 0;
+}
+
+.outcome-judge-container {
+  margin-right: 0;
 }
