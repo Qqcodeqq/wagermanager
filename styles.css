@@ -13,7 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 .info-container {
@@ -44,13 +44,20 @@ body {
 .container,
 .actions-container {
   flex: 1;
-  padding: 3rem;
+  padding: 1rem;
   box-sizing: border-box;
   background-color: #1e1c2c;
   border-radius: 1rem;
   width: 100%;
 }
 
+.container {
+  margin-right: 1rem;
+}
+
+.container:last-child {
+  margin-right: 0;
+}
 .container:last-child {
   margin-right: 0;
 }
