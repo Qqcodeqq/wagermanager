@@ -82,7 +82,8 @@ h2 {
   cursor: pointer;
   text-align: center;
   margin-bottom: 1rem;
-  width: 33%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .btn:hover {
@@ -120,16 +121,20 @@ h2 {
 
 .button-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
 .button-row .btn {
-  width: 32%;
-  margin-bottom: 0;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .judge-panel-container {
   margin-left: 1rem;
+}
+
+.outcome-container, .judge-panel-container {
+  padding-bottom: 1rem;
 }
