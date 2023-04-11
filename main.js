@@ -92,11 +92,18 @@ async function updateContractInfo() {
   const participant1 = await contract.methods.participant1().call();
   const participant2 = await contract.methods.participant2().call();
   const judge = await contract.methods.judge().call();
+  const participant1Outcome = await contract.methods.outcomes(participant1).call();
+  const participant2Outcome = await contract.methods.outcomes(participant2).call();
+  
 
   document.getElementById("wagerAmountInfo").innerText = `${web3.utils.fromWei(wagerAmount, "ether")} ETH`;
   document.getElementById("participant1Info").innerText = `${participant1 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant1}`;
   document.getElementById("participant2Info").innerText = `${participant2 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant2}`;
   document.getElementById("judgeInfo").innerText = `${judge}`;
+  document.getElementById("participant1Outcome").innerText = outcomeText(participant1Outcome);
+  document.getElementById("participant2Outcome").innerText = outcomeText(participant2Outcome);
+  
+  }
 }
 
 async function claim() {
