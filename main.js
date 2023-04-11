@@ -3,7 +3,7 @@
 
 const providerUrl = 'https://nova.arbitrum.io/rpc';
 
-const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"approveEmergencyWithdrawal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claimJudgeFee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_judge","type":"address"},{"internalType":"uint256","name":"_wagerAmount","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"emergencyWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"emergencyWithdrawalApproved","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"finalOutcome","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"participant","type":"address"}],"name":"isDeposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"judge","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"outcome","type":"uint256"}],"name":"judgeDecision","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"judgeFeeClaimed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"outcomes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant1","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant1Deposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant2","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant2Deposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"resetContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"outcome","type":"uint256"}],"name":"submitOutcome","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"wagerAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]; // Replace <ABI_JSON> with the ABI you provided
+const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"approveEmergencyWithdrawal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claimJudgeFee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_judge","type":"address"},{"internalType":"uint256","name":"_wagerAmount","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"emergencyWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"emergencyWithdrawalApproved","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"finalOutcome","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"participant","type":"address"}],"name":"isDeposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"judge","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"outcome","type":"uint256"}],"name":"judgeDecision","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"judgeFeeClaimed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"outcomes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant1","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant1Deposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant2","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"participant2Deposited","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"refundParticipants","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"resetContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"outcome","type":"uint256"}],"name":"submitOutcome","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"wagerAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 const contractAddress = '0x3e06f9518A446a127A5bB72011C4EDFF268F13b4'; // Replace with your contract address
 
 let web3;
@@ -40,9 +40,6 @@ document.getElementById("depositBtn").addEventListener("click", deposit);
 document.getElementById("claimBtn").addEventListener("click", claim);
 document.getElementById("iWinBtn").addEventListener("click", iWin);
 document.getElementById("iLoseBtn").addEventListener("click", iLose);
-document.getElementById("submitJudgeDecisionBtn").addEventListener("click", submitJudgeDecision);
-document.getElementById("approveEmergencyWithdrawBtn").addEventListener("click", approveEmergencyWithdraw);
-document.getElementById("claimJudgeFeeBtn").addEventListener("click", claimJudgeFee);
 
 async function connectWallet() {
   if (window.ethereum) {
@@ -52,7 +49,7 @@ async function connectWallet() {
     try {
       await window.ethereum.request({ method: "eth_requestAccounts" });
       userAddress = (await web3.eth.getAccounts())[0];
-      
+
       updateContractInfo();
 
       document.getElementById("connectBtn").style.display = "none";
@@ -92,18 +89,11 @@ async function updateContractInfo() {
   const participant1 = await contract.methods.participant1().call();
   const participant2 = await contract.methods.participant2().call();
   const judge = await contract.methods.judge().call();
-  const participant1Outcome = await contract.methods.outcomes(participant1).call();
-  const participant2Outcome = await contract.methods.outcomes(participant2).call();
-  
 
   document.getElementById("wagerAmountInfo").innerText = `${web3.utils.fromWei(wagerAmount, "ether")} ETH`;
   document.getElementById("participant1Info").innerText = `${participant1 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant1}`;
   document.getElementById("participant2Info").innerText = `${participant2 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant2}`;
   document.getElementById("judgeInfo").innerText = `${judge}`;
-  document.getElementById("participant1Outcome").innerText = outcomeText(participant1Outcome);
-  document.getElementById("participant2Outcome").innerText = outcomeText(participant2Outcome);
-  
-  }
 }
 
 async function claim() {
@@ -140,44 +130,3 @@ async function iLose() {
     alert("An error occurred while submitting the outcome. Check the console for more details.");
   }
 }
-
-async function submitJudgeDecision() {
-  const judgeOutcome = parseInt(document.getElementById("judgeOutcome").value);
-
-  if (isNaN(judgeOutcome) || judgeOutcome < 1 || judgeOutcome > 2) {
-    alert("Invalid outcome. Please enter 1 or 2.");
-    return;
-  }
-
-  try {
-    await contract.methods.judgeDecision(judgeOutcome).send({ from: userAddress });
-    alert("Judge decision submitted successfully!");
-    updateContractInfo();
-  } catch (error) {
-    console.error("An error occurred while submitting the judge decision:", error);
-    alert("An error occurred while submitting the judge decision. Check the console for more details.");
-  }
-}
-
-async function approveEmergencyWithdraw() {
-  try {
-    await contract.methods.approveEmergencyWithdrawal().send({ from: userAddress });
-    alert("Emergency withdrawal approved!");
-    updateContractInfo();
-  } catch (error) {
-    console.error("An error occurred while approving the emergency withdrawal:", error);
-    alert("An error occurred while approving the emergency withdrawal. Check the console for more details.");
-  }
-}
-
-async function claimJudgeFee() {
-  try {
-    await contract.methods.claimJudgeFee().send({ from: userAddress });
-    alert("Judge fee claimed successfully!");
-    updateContractInfo();
-  } catch (error) {
-    console.error("An error occurred while claiming the judge fee:", error);
-    alert("An error occurred while claiming the judge fee. Check the console for more details.");
-  }
-}
-
