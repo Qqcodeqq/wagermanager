@@ -1,4 +1,4 @@
-body {
+
   background-color: #100e17;
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -138,3 +138,4 @@ h2 {
 .outcome-container, .judge-panel-container {
   padding-bottom: 1rem;
 }
+
