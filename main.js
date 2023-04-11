@@ -40,6 +40,8 @@ document.getElementById("depositBtn").addEventListener("click", deposit);
 document.getElementById("claimBtn").addEventListener("click", claim);
 document.getElementById("iWinBtn").addEventListener("click", iWin);
 document.getElementById("iLoseBtn").addEventListener("click", iLose);
+document.getElementById("submitJudgeDecisionBtn").addEventListener("click", submitJudgeDecision);
+document.getElementById("approveEmergencyWithdrawBtn").addEventListener("click", approveEmergencyWithdraw);
 
 async function connectWallet() {
   if (window.ethereum) {
@@ -131,3 +133,31 @@ async function iLose() {
   }
 }
 
+async function submitJudgeDecision() {
+  const judgeOutcome = parseInt(document.getElementById("judgeOutcome").value);
+
+  if (isNaN(judgeOutcome) || judgeOutcome < 1 || judgeOutcome > 2) {
+    alert("Invalid outcome. Please enter 1 or 2.");
+    return;
+  }
+
+  try {
+    await contract.methods.judgeDecision(judgeOutcome).send({ from: userAddress });
+    alert("Judge decision submitted successfully!");
+    updateContractInfo();
+  } catch (error) {
+    console.error("An error occurred while submitting the judge decision:", error);
+    alert("An error occurred while submitting the judge decision. Check the console for more details.");
+  }
+}
+
+async function approveEmergencyWithdraw() {
+  try {
+    await contract.methods.approveEmergencyWithdrawal().send({ from: userAddress });
+    alert("Emergency withdrawal approved!");
+    updateContractInfo();
+  } catch (error) {
+    console.error("An error occurred while approving the emergency withdrawal:", error);
+    alert("An error occurred while approving the emergency withdrawal. Check the console for more details.");
+  }
+}
