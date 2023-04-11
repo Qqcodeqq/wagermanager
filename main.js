@@ -42,6 +42,7 @@ document.getElementById("iWinBtn").addEventListener("click", iWin);
 document.getElementById("iLoseBtn").addEventListener("click", iLose);
 document.getElementById("submitJudgeDecisionBtn").addEventListener("click", submitJudgeDecision);
 document.getElementById("approveEmergencyWithdrawBtn").addEventListener("click", approveEmergencyWithdraw);
+document.getElementById("claimJudgeFeeBtn").addEventListener("click", claimJudgeFee);
 
 async function connectWallet() {
   if (window.ethereum) {
@@ -161,3 +162,15 @@ async function approveEmergencyWithdraw() {
     alert("An error occurred while approving the emergency withdrawal. Check the console for more details.");
   }
 }
+
+async function claimJudgeFee() {
+  try {
+    await contract.methods.claimJudgeFee().send({ from: userAddress });
+    alert("Judge fee claimed successfully!");
+    updateContractInfo();
+  } catch (error) {
+    console.error("An error occurred while claiming the judge fee:", error);
+    alert("An error occurred while claiming the judge fee. Check the console for more details.");
+  }
+}
+
