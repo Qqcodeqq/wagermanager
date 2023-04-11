@@ -35,10 +35,13 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.interaction-container {
+.interaction-container,
+.outcomes-container,
+.judge-panel-container {
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .container,
