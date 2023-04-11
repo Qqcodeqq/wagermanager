@@ -9,6 +9,8 @@ const contractAddress = '0x3e06f9518A446a127A5bB72011C4EDFF268F13b4'; // Replace
 let web3;
 let contract;
 let userAddress;
+let participant1;
+let participant2;
 
 window.addEventListener("load", async () => {
   if (window.ethereum) {
@@ -40,6 +42,18 @@ document.getElementById("depositBtn").addEventListener("click", deposit);
 document.getElementById("claimBtn").addEventListener("click", claim);
 document.getElementById("iWinBtn").addEventListener("click", iWin);
 document.getElementById("iLoseBtn").addEventListener("click", iLose);
+
+const judgeDecisionInput = document.getElementById("judge-decision");
+const judgeDecisionButton = document.getElementById("submit-judge-decision");
+const claimJudgeFeeButton = document.getElementById("claim-judge-fee");
+const approveEmergencyWithdrawalButton = document.getElementById("approve-emergency-withdrawal");
+const refundButton = document.getElementById("refund-btn");
+
+judgeDecisionButton.addEventListener("click", submitJudgeDecision);
+claimJudgeFeeButton.addEventListener("click", claimJudgeFee);
+approveEmergencyWithdrawalButton.addEventListener("click", approveEmergencyWithdrawal);
+refundButton.addEventListener("click", refundParticipants);
+
 
 async function connectWallet() {
   if (window.ethereum) {
@@ -86,14 +100,16 @@ async function deposit() {
 
 async function updateContractInfo() {
   const wagerAmount = await contract.methods.wagerAmount().call();
-  const participant1 = await contract.methods.participant1().call();
-  const participant2 = await contract.methods.participant2().call();
+  participant1 = await contract.methods.participant1().call();
+  participant2 = await contract.methods.participant2().call();
   const judge = await contract.methods.judge().call();
 
   document.getElementById("wagerAmountInfo").innerText = `${web3.utils.fromWei(wagerAmount, "ether")} ETH`;
   document.getElementById("participant1Info").innerText = `${participant1 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant1}`;
   document.getElementById("participant2Info").innerText = `${participant2 === "0x0000000000000000000000000000000000000000" ? "No participant yet, you can deposit!" : participant2}`;
   document.getElementById("judgeInfo").innerText = `${judge}`;
+
+  updateOutcomes(participant1, participant2);
 }
 
 async function claim() {
@@ -128,5 +144,66 @@ async function iLose() {
   } catch (error) {
     console.error("An error occurred while submitting the outcome:", error);
     alert("An error occurred while submitting the outcome. Check the console for more details.");
+  }
+}
+
+async function updateOutcomes(participant1, participant2) {
+  const outcome1 = await contract.methods.outcomes(participant1).call();
+  const outcome2 = await contract.methods.outcomes(participant2).call();
+
+  const participant1Outcome = document.getElementById("participant1-outcome");
+  const participant2Outcome = document.getElementById("participant2-outcome");
+
+  participant1Outcome.innerText = `${outcome1 === "0" ? "Outcome not submitted" : outcome1 === "1" ? "Win" : "Loss"}`;
+  participant2Outcome.innerText = `${outcome2 === "0" ? "Outcome not submitted" : outcome2 === "1" ? "Win" : "Loss"}`;
+}
+
+async function submitJudgeDecision() {
+  const decision = judgeDecisionInput.value;
+  if (decision !== "1" && decision !== "2") {
+    alert("Invalid judge decision.");
+    return;
+  }
+
+  try {
+    await contract.methods.judgeDecision(decision).send({ from: userAddress });
+    alert("Judge decision submitted successfully!");
+    updateContractInfo();
+  } catch (error) {
+    console.error("An error occurred while submitting the judge decision:", error);
+    alert("An error occurred while submitting the judge decision. Check the console for more details.");
+  }
+}
+
+async function claimJudgeFee() {
+  try {
+    await contract.methods.claimJudgeFee().send({ from: userAddress });
+    alert("Judge fee claimed successfully!");
+    updateContractInfo();
+  } catch (error) {
+    console.error("An error occurred while claiming judge fee:", error);
+    alert("An error occurred while claiming judge fee. Check the console for more details.");
+  }
+}
+
+async function approveEmergencyWithdrawal() {
+  try {
+    await contract.methods.approveEmergencyWithdrawal().send({ from: userAddress });
+    alert("Emergency withdrawal approved successfully!");
+    updateContractInfo();
+  } catch (error) {
+    console.error("An error occurred while approving emergency withdrawal:", error);
+    alert("An error occurred while approving emergency withdrawal. Check the console for more details.");
+  }
+}
+
+async function refundParticipants() {
+  try {
+    await contract.methods.refundParticipants().send({ from: userAddress });
+    alert("Refund successful!");
+    updateContractInfo();
+  } catch (error) {
+    console.error("An error occurred while refunding participants:", error);
+    alert("An error occurred while refunding participants. Check the console for more details.");
   }
 }
